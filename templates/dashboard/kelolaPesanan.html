@@ -1,0 +1,36 @@
+{% extends 'dashboard/BaseDash.html' %}
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div style="display: flex;">
+            <div>
+                <h2>Pesanan</h2>
+                <p class="subtitle">Wedding Box</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Iterate over each order -->
+            {% for pesanan in pesanan_coll %}
+            <div class="col-md-4 col-sm-12 card-content">
+                <div class="card mb-3 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Pesanan oleh: {{ pesanan.username }}</h5>
+                        <p class="card-text">Tanggal pesanan: {{ pesanan.order_date.strftime('%d-%m-%Y') }}</p>
+                        <p class="card-text">Total: Rp {{ pesanan.total }}</p>
+                        <a href="{{ url_for('detailPesanan', id=pesanan._id) }}" class="btn btn-primary w-100">Detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination controls -->
+        <div class="pagination">
+            {{ pagination.links }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
